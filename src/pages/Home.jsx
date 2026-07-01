@@ -5,6 +5,7 @@ import scores from '../data/scores.json'
 import meta from '../data/meta.json'
 import ScrollReveal from '../components/ScrollReveal'
 import ScoreBadge from '../components/ScoreBadge'
+import { useMobile } from '../components/MobileLayout'
 
 const GRADE_COLOR = { A:'#22c55e', B:'#84cc16', C:'#f59e0b', D:'#f97316', F:'#ef4444' }
 const GRADE_LABEL = { A:'Excellent', B:'Good', C:'Moderate', D:'Poor', F:'Critical' }
@@ -16,6 +17,7 @@ export default function Home() {
   const [sortDir, setSortDir] = useState('asc')
   const [gradeFilter, setGradeFilter] = useState('all')
   const [mapLoaded, setMapLoaded] = useState(false)
+  const isMobile = useMobile()
   const [heroVisible, setHeroVisible] = useState(false)
   const mapRef = useRef(null)
   const leafletMap = useRef(null)
@@ -96,7 +98,7 @@ export default function Home() {
         <div style={{position:'absolute',top:'50%',left:'50%',transform:'translate(-50%,-50%)',width:'60vw',height:'60vw',borderRadius:'50%',background:'radial-gradient(ellipse,rgba(79,142,247,0.06) 0%,transparent 70%)',pointerEvents:'none',zIndex:0}}/>
 
         <div style={{maxWidth:1300,margin:'0 auto',padding:'0 2rem',position:'relative',zIndex:2,width:'100%'}}>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'4rem',alignItems:'center'}}>
+          <div style={{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr',gap:isMobile?'2rem':'4rem',alignItems:'center'}}>
 
             {/* Left */}
             <div style={{opacity:heroVisible?1:0,transform:heroVisible?'translateY(0)':'translateY(32px)',transition:'all 1s cubic-bezier(0.16,1,0.3,1)'}}>
@@ -151,7 +153,7 @@ export default function Home() {
               </div>
 
               {/* Top 3 + Bottom 3 */}
-              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+              <div style={{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr',gap:12}}>
                 <div style={{background:'rgba(34,197,94,0.05)',border:'1px solid rgba(34,197,94,0.15)',borderRadius:14,padding:'1.25rem'}}>
                   <div style={{fontSize:11,color:'#22c55e',fontWeight:700,letterSpacing:'0.08em',textTransform:'uppercase',marginBottom:'0.75rem'}}>🏆 Top 3</div>
                   {top5.slice(0,3).map(c=>(
@@ -200,14 +202,14 @@ export default function Home() {
       </div>
 
       {/* ═══ GRADE BREAKDOWN ═══ */}
-      <div style={{padding:'5rem 2rem',background:'var(--bg2)',borderBottom:'1px solid var(--border)'}}>
+      <div style={{padding:isMobile?'3rem 1.25rem':'5rem 2rem',background:'var(--bg2)',borderBottom:'1px solid var(--border)'}}>
         <div style={{maxWidth:1300,margin:'0 auto'}}>
           <ScrollReveal>
             <div style={{marginBottom:'2rem'}}>
               <div className="label" style={{marginBottom:'0.75rem'}}>Grade distribution</div>
               <h2 style={{fontSize:'clamp(24px,3vw,40px)',fontWeight:800,letterSpacing:'-0.03em'}}>How do US cities stack up?</h2>
             </div>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(5,1fr)',gap:12,marginBottom:'2rem'}}>
+            <div style={{display:'grid',gridTemplateColumns:isMobile?'repeat(3,1fr)':'repeat(5,1fr)',gap:8,marginBottom:'2rem'}}>
               {['A','B','C','D','F'].map(g=>{
                 const count = gradeCount[g]||0
                 const pct = Math.round((count/scores.length)*100)
@@ -244,7 +246,7 @@ export default function Home() {
       <div style={{padding:'5rem 2rem',background:'var(--bg)'}}>
         <div style={{maxWidth:1300,margin:'0 auto'}}>
           <ScrollReveal>
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:'2rem',flexWrap:'wrap',gap:'1rem'}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:isMobile?'flex-start':'flex-end',marginBottom:'1.5rem',flexWrap:'wrap',gap:'1rem',flexDirection:isMobile?'column':'row'}}>
               <div>
                 <div className="label" style={{marginBottom:'0.75rem'}}>Interactive map</div>
                 <h2 style={{fontSize:'clamp(24px,3vw,40px)',fontWeight:800,letterSpacing:'-0.03em'}}>Emergency equity across America</h2>
@@ -258,7 +260,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div style={{borderRadius:16,overflow:'hidden',border:'1px solid var(--border)',height:500,position:'relative',boxShadow:'0 32px 80px rgba(0,0,0,0.5)'}}>
+            <div style={{borderRadius:16,overflow:'hidden',border:'1px solid var(--border)',height:isMobile?300:500,position:'relative',boxShadow:'0 32px 80px rgba(0,0,0,0.5)'}}>
               {!mapLoaded && (
                 <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',background:'#080b14',zIndex:10,flexDirection:'column',gap:14}}>
                   <div style={{width:28,height:28,border:'2px solid var(--accent)',borderTopColor:'transparent',borderRadius:'50%',animation:'spin 0.8s linear infinite'}}/>
@@ -275,7 +277,7 @@ export default function Home() {
       <div style={{padding:'0 2rem 6rem',background:'var(--bg)'}}>
         <div style={{maxWidth:1300,margin:'0 auto'}}>
           <ScrollReveal>
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:'2rem',flexWrap:'wrap',gap:'1rem'}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:isMobile?'flex-start':'flex-end',marginBottom:'1.5rem',flexWrap:'wrap',gap:'1rem',flexDirection:isMobile?'column':'row'}}>
               <div>
                 <div className="label" style={{marginBottom:'0.75rem'}}>Full rankings</div>
                 <h2 style={{fontSize:'clamp(24px,3vw,40px)',fontWeight:800,letterSpacing:'-0.03em'}}>City leaderboard</h2>

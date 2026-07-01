@@ -3,6 +3,7 @@ import { ArrowLeft, Info, TrendingUp, AlertTriangle, CheckCircle, ExternalLink }
 import { useEffect, useRef } from 'react'
 import scores from '../data/scores.json'
 import ScoreBadge from '../components/ScoreBadge'
+import { useMobile } from '../components/MobileLayout'
 import ScrollReveal from '../components/ScrollReveal'
 
 const GRADE_COLOR = { A:'#22c55e', B:'#84cc16', C:'#f59e0b', D:'#f97316', F:'#ef4444' }
@@ -180,6 +181,7 @@ function AnimatedBar({ value, color }) {
 const PRIORITY_COLOR = { High:'#ef4444', Medium:'#f59e0b', Low:'#22c55e' }
 
 export default function City() {
+  const isMobile = useMobile()
   const { id } = useParams()
   const city = scores.find(c => c.id === id)
 
@@ -210,7 +212,7 @@ export default function City() {
             onMouseLeave={e=>e.currentTarget.style.color='var(--text2)'}
           ><ArrowLeft size={14}/> Back to Index</Link>
 
-          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:'2rem',flexWrap:'wrap'}}>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',gap:'1.5rem',flexWrap:'wrap',flexDirection:isMobile?'column-reverse':'row'}}>
             <div>
               <div className="label" style={{marginBottom:'0.75rem'}}>City Report · Rank #{city.rank} of {scores.length} · {percentile}th percentile</div>
               <h1 style={{fontFamily:'var(--serif)',fontSize:'clamp(32px,5vw,64px)',fontWeight:400,fontStyle:'italic',letterSpacing:'-0.02em',marginBottom:'0.5rem',lineHeight:1.05}}>{city.name}</h1>
@@ -240,7 +242,7 @@ export default function City() {
       </div>
 
       <div style={{maxWidth:1100,margin:'0 auto',padding:'2.5rem 2rem'}}>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 300px',gap:'2rem',alignItems:'start'}}>
+        <div style={{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 300px',gap:'1.5rem',alignItems:'start'}}>
 
           {/* Main content */}
           <div style={{display:'flex',flexDirection:'column',gap:'1.5rem'}}>
@@ -291,7 +293,7 @@ export default function City() {
                   </div>
                 </div>
                 <AnimatedBar value={city.naloxoneScore} color="var(--accent)"/>
-                <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginTop:'1.25rem'}}>
+                <div style={{display:'grid',gridTemplateColumns:isMobile?'1fr':'1fr 1fr',gap:10,marginTop:'1.25rem'}}>
                   <div style={{padding:'1rem',background:'rgba(79,142,247,0.06)',borderRadius:8,border:'1px solid rgba(79,142,247,0.15)'}}>
                     <div className="label" style={{marginBottom:4}}>State rate 2024</div>
                     <div style={{fontSize:26,fontWeight:900,color:'var(--accent2)'}}>{city.naloxoneRate}<span style={{fontSize:13,color:'var(--text3)'}}>/100</span></div>

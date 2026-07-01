@@ -66,3 +66,26 @@ input,select{font-family:var(--font)}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 768px) {
+  body { overflow-x: hidden; }
+
+  .mobile-stack { grid-template-columns: 1fr !important; }
+  .mobile-pad { padding-left: 1.25rem !important; padding-right: 1.25rem !important; }
+  .mobile-hide { display: none !important; }
+  .mobile-small-map { height: 300px !important; }
+  .mobile-wrap { flex-wrap: wrap !important; }
+  .mobile-center { text-align: center !important; justify-content: center !important; }
+  .mobile-full { width: 100% !important; }
+  .mobile-2col { grid-template-columns: 1fr 1fr !important; }
+
+  /* Leaderboard scrollable on mobile */
+  .leaderboard-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .leaderboard-inner { min-width: 600px; }
+}
+
+@media (max-width: 480px) {
+  .btn { padding: 10px 16px !important; font-size: 13px !important; }
+  .mobile-2col { grid-template-columns: 1fr !important; }
+}
