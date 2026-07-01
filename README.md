@@ -2,7 +2,7 @@
 
 A free public report card scoring every major US city on emergency response fairness and naloxone access equity.
 
-**Live site:** https://accesswatch.vercel.app
+**Live site:** https://access-watch.vercel.app/
 
 ## What it measures
 1. **EMS Response Equity** — How evenly ambulance/911 response times are distributed across rich vs poor neighborhoods
