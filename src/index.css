@@ -1,0 +1,68 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060810;
+  --bg2:#0a0d18;
+  --surface:rgba(255,255,255,0.04);
+  --surface2:rgba(255,255,255,0.07);
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.12);
+  --text:#eef0f8;
+  --text2:rgba(238,240,248,0.6);
+  --text3:rgba(238,240,248,0.35);
+  --text4:rgba(238,240,248,0.2);
+  --accent:#4f8ef7;
+  --accent2:#7ab3ff;
+  --accent-glow:rgba(79,142,247,0.2);
+  --green:#22c55e;
+  --green-glow:rgba(34,197,94,0.2);
+  --lime:#84cc16;
+  --yellow:#f59e0b;
+  --orange:#f97316;
+  --red:#ef4444;
+  --red-glow:rgba(239,68,68,0.2);
+  --font:'Inter',-apple-system,sans-serif;
+  --serif:'DM Serif Display',Georgia,serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:var(--font)}
+input,select{font-family:var(--font)}
+
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;border:none;transition:all 0.2s;cursor:pointer}
+.btn-primary{background:var(--accent);color:white;box-shadow:0 0 20px var(--accent-glow)}
+.btn-primary:hover{background:#3a7af0;transform:translateY(-1px);box-shadow:0 0 32px rgba(79,142,247,0.35)}
+.btn-ghost{background:rgba(255,255,255,0.06);color:var(--text);border:1px solid var(--border2)}
+.btn-ghost:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2)}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);backdrop-filter:blur(12px)}
+.card:hover{background:var(--surface2);border-color:var(--border2);transform:translateY(-2px);box-shadow:0 16px 48px rgba(0,0,0,0.4)}
+
+.label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3)}
+
+.grade-a{color:#22c55e}.grade-b{color:#84cc16}.grade-c{color:#f59e0b}.grade-d{color:#f97316}.grade-f{color:#ef4444}
+.glow-a{box-shadow:0 0 20px rgba(34,197,94,0.25)}.glow-b{box-shadow:0 0 20px rgba(132,204,22,0.25)}.glow-c{box-shadow:0 0 20px rgba(245,158,11,0.25)}.glow-d{box-shadow:0 0 20px rgba(249,115,22,0.25)}.glow-f{box-shadow:0 0 20px rgba(239,68,68,0.25)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.5)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes orbit{from{transform:rotate(0deg) translateX(120px) rotate(0deg)}to{transform:rotate(360deg) translateX(120px) rotate(-360deg)}}
+@keyframes ringDash{from{stroke-dashoffset:565}to{stroke-dashoffset:var(--target-offset)}}
+@keyframes glow{0%,100%{opacity:0.6}50%{opacity:1}}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Leaflet dark */
+.leaflet-container{background:#080b14!important;font-family:var(--font)!important}
+.leaflet-popup-content-wrapper{background:rgba(10,13,24,0.97)!important;backdrop-filter:blur(20px)!important;border:1px solid var(--border2)!important;color:var(--text)!important;border-radius:12px!important;box-shadow:0 20px 60px rgba(0,0,0,0.7)!important;padding:0!important}
+.leaflet-popup-content{margin:0!important;padding:16px!important}
+.leaflet-popup-tip{background:rgba(10,13,24,0.97)!important}
+.leaflet-control-zoom{border:1px solid var(--border2)!important;border-radius:8px!important;overflow:hidden}
+.leaflet-control-zoom a{background:rgba(10,13,24,0.9)!important;color:var(--text)!important;border-color:var(--border)!important}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}

@@ -1,0 +1,35 @@
+{
+  "lastUpdated": "2026-07-01T01:28:11.762Z",
+  "nextUpdate": "2026-09-29T01:28:11.762Z",
+  "totalCities": 57,
+  "liveCities": 5,
+  "dataVersion": "2024.Q2",
+  "nationalNaloxoneAvg": 0.4,
+  "sources": [
+    {
+      "name": "CDC IQVIA Naloxone Dispensing Rate Maps 2024",
+      "url": "https://www.cdc.gov/overdose-prevention/data-research/facts-stats/naloxone-dispensing-rate-maps.html"
+    },
+    {
+      "name": "NEMSIS 2024 Public Release Research Dataset",
+      "url": "https://nemsis.org"
+    },
+    {
+      "name": "NYC Open Data — EMS Incident Dispatch",
+      "url": "https://data.cityofnewyork.us"
+    },
+    {
+      "name": "US Census Bureau ACS 2023",
+      "url": "https://www.census.gov"
+    },
+    {
+      "name": "CDC PLACES Data Portal",
+      "url": "https://www.cdc.gov/places"
+    }
+  ],
+  "methodology": {
+    "emsWeight": 0.5,
+    "naloxoneWeight": 0.5,
+    "description": "Score = (EMS Equity × 0.5) + (Naloxone Access × 0.5). EMS measures response time fairness across income levels. Naloxone measures dispensing rate vs national average."
+  }
+}

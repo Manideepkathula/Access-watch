@@ -1,0 +1,48 @@
+name: Quarterly Data Update
+
+on:
+  schedule:
+    # Runs at 9am UTC on the 1st of Jan, Apr, Jul, Oct (every 3 months)
+    - cron: '0 9 1 1,4,7,10 *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run data update script
+        run: node scripts/fetch-data.js
+
+      - name: Check if data changed
+        id: check
+        run: |
+          git diff --quiet src/data/ || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push updated data
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config --global user.name 'AccessWatch Bot'
+          git config --global user.email 'bot@accesswatch.app'
+          git add src/data/
+          git commit -m "chore: quarterly data update $(date +'%Y-%m-%d')"
+          git push
+
+      - name: Trigger Vercel redeploy
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
+        continue-on-error: true
